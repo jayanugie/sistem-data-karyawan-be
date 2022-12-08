@@ -3,7 +3,7 @@ const { Pegawai } = require("../models");
 // ambil semua pegawai
 const getPegawai = (req, res) => {
   Pegawai.findAll({
-    order: [["id", "DESC"]],
+    order: [["id", "ASC"]],
   })
     .then((data) => {
       return res.status(200).json(data);
@@ -29,6 +29,12 @@ const createPegawai = async (req, res) => {
 
   return res.status(200).json({
     message: "Pegawai berhasil ditambahkan",
+    data: {
+        id: data.id,
+        nama: data.nama,
+        jabatan: data.jabatan,
+        kontrak: data.kontrak
+    }
   });
 };
 
@@ -56,7 +62,7 @@ const updatePegawai = (req, res) => {
     }
   ).then(() => {
     return res.status(200).json({
-      message: "Update successful",
+      message: "Ubah data berhasil",
     });
   });
 };
